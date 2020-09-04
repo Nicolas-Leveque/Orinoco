@@ -15,7 +15,7 @@ function retrieveProductList(e) {
                 let newLink = document.createElement("a");
                 let newImg = document.createElement("img");
                 let newLabel = document.createElement("p");
-                newContainer.classList.add('col-lg-4', 'col-md-6', 'mb-4');
+                newContainer.classList.add('col-lg-3', 'col-md-4', 'mb-4');
                 newImg.setAttribute('src', product.imageUrl);
                 newLink.setAttribute('href', `product.html?id=${product._id}`);
                 newLabel.setAttribute('class', 'product-name');

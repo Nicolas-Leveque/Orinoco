@@ -28,6 +28,14 @@ function productCard() {
             newCBText[0].textContent = productObj.name;
             newCBText[1].textContent = productObj.price / 100 +" €";
             newCBText[2].textContent = productObj.description;
+            const menuLenses = document.getElementById('lenses');
+            console.log(productObj.lenses);
+            productObj.lenses.forEach((lense) => {
+                console.log(lense);
+                const newOption = document.createElement('option');
+                newOption.textContent = lense;
+                menuLenses.appendChild(newOption);
+            })
         }
     }
 }

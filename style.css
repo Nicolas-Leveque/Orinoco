@@ -17,10 +17,14 @@ a img {
 }
 .product {
     background-color: #FAFAFA;
+    color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.list-group {
+    color: black;
 }
 .product-name {
     height: 2em;
