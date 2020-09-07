@@ -4,16 +4,11 @@ function productCard() {
     const idProduct = urlParam.get('id');
     let productObj;
     let request = new XMLHttpRequest;
-    request.open("GET", `http://localhost:3000/api/cameras?/:_id=${idProduct}`);
+    request.open("GET", `http://localhost:3000/api/cameras?/${idProduct}`);
     request.send();
     request.onreadystatechange = function() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let productList = JSON.parse(this.responseText);
-            productList.forEach(product => {
-                if (product._id == idProduct) {
-                    productObj = product;
-                };
-            });
+            let productObj = JSON.parse(this.responseText);
             let newCard = document.createElement('div');
             let newImg = document.createElement('img');
             let newCardBody = document.createElement('div');
