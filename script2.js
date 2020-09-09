@@ -4,11 +4,11 @@ function productCard() {
     const idProduct = urlParam.get('id');
     let productObj;
     let request = new XMLHttpRequest;
-    request.open("GET", `http://localhost:3000/api/cameras?/${idProduct}`);
+    request.open("GET", `http://localhost:3000/api/cameras/${idProduct}`);
     request.send();
     request.onreadystatechange = function() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let productObj = JSON.parse(this.responseText);
+            productObj = JSON.parse(this.responseText);
             let newCard = document.createElement('div');
             let newImg = document.createElement('img');
             let newCardBody = document.createElement('div');
@@ -24,9 +24,7 @@ function productCard() {
             newCBText[1].textContent = productObj.price / 100 +" €";
             newCBText[2].textContent = productObj.description;
             const menuLenses = document.getElementById('lenses');
-            console.log(productObj.lenses);
             productObj.lenses.forEach((lense) => {
-                console.log(lense);
                 const newOption = document.createElement('option');
                 newOption.textContent = lense;
                 menuLenses.appendChild(newOption);
@@ -34,4 +32,23 @@ function productCard() {
         }
     }
 }
+function panier() {
+    const queryString = window.location.search;
+    const urlParam = new URLSearchParams(queryString);
+    const idProduct = urlParam.get('id');
+    let productObj;
+    let request = new XMLHttpRequest;
+    request.open("GET", `http://localhost:3000/api/cameras/${idProduct}`);
+    request.send();
+    request.onreadystatechange = function() {
+        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
+            productObj = JSON.parse(this.responseText);
+            console.log(productObj._id);
+            localStorage.setItem(productObj.name, productObj._id)
+            console.log(localStorage);
+        }
+        }
+}
 window.onload = productCard;
+const btnPanier = document.getElementById("ajout-panier");
+btnPanier.addEventListener('click', panier);

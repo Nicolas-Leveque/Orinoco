@@ -22,7 +22,7 @@ function retrieveProductList(e) {
                 newLabel.innerHTML = `<div>${product.name}</div><div>${product.price/100} €</div>` ;
                 newLink.appendChild(newImg);
                 newLink.appendChild(newLabel);
-                newLink.classList.add("product");
+                newLink.classList.add("product", "card");
                 newContainer.appendChild(newLink)
                 listeProduits.appendChild(newContainer);
 
