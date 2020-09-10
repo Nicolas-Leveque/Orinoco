@@ -43,11 +43,16 @@ function panier() {
     request.onreadystatechange = function() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             productObj = JSON.parse(this.responseText);
-            console.log(productObj._id);
-            localStorage.setItem(productObj.name, productObj._id)
+            if (localStorage.getItem(productObj._id)) {
+                localStorage[productObj._id]++
+            } else {
+                localStorage.setItem(productObj._id, 1);
+            }
+            
+            //localStorage.setItem(this.responseText, 1);
             console.log(localStorage);
         }
-        }
+    }
 }
 window.onload = productCard;
 const btnPanier = document.getElementById("ajout-panier");

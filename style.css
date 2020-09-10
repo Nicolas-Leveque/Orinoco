@@ -1,12 +1,12 @@
 body {
     padding: 0;
-    background-color: #DCEDC8;
+    background-color: #f3e9f1;
 }
 
 header {
     background-color: #f3e9f1;
 }
-a img {
+.card {
     width: 90%;
     margin-top: 5%;
     
