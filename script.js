@@ -1,12 +1,13 @@
-function retrieveProductList(e) {
-    e.preventDefault();
+const listeProduits = document.getElementById('main-list');
+
+//récupération des infos sur les produits et affichage dynamique des éléments
+function retrieveProductList() {
     let request = new XMLHttpRequest;
     request.open("GET", "http://localhost:3000/api/cameras");
     request.send();
     request.onreadystatechange = function() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
             let productList = JSON.parse(this.responseText);
-            console.log(productList)
             if (listeProduits.hasChildNodes()) {
                 let child = document.getElementById('product-list');
                 listeProduits.removeChild(child);
@@ -26,13 +27,10 @@ function retrieveProductList(e) {
                 newLink.appendChild(newLabel);
                 newLink.classList.add("product", "card");
                 newContainer.appendChild(newLink)
-                listeProduits.appendChild(newContainer);
-
-
-                
+                listeProduits.appendChild(newContainer);               
             });
         }
     }
 };
-const listeProduits = document.getElementById('main-list');
+
 window.onload = retrieveProductList;
