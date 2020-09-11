@@ -85,12 +85,11 @@ productCard()
                 id: response["_id"],
                 name: response["name"],
                 price: response["price"],
-                imageUrl: response["imageUrl"],
                 lense: productLense,
                 quantity: productQty
             }))
             //envoie l'objet dans le localStorage
-            const numeroLigne = "panier" + (localStorage.length + 1);
+            const numeroLigne = "panier" + localStorage.length;
             localStorage.setItem(numeroLigne, panierObj)
             console.log(localStorage);
         });
