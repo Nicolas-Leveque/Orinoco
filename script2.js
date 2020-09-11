@@ -6,7 +6,6 @@ const idProduct = urlParam.get('id');
 
 //créations des éléments dynamique
 
-let productObj;
 let newCard = document.createElement('div');
 let newImg = document.createElement('img');
 let newCardBody = document.createElement('div');
@@ -42,21 +41,62 @@ productCard()
         newCBText[0].textContent = response['name'];
         newCBText[1].textContent = response['price'] / 100 +" €";
         newCBText[2].textContent = response['description'];
+    });
+
+//Choix de la lentille
+let productLense;
+productCard()
+    .then(function(response) {
         const menuLenses = document.getElementById('lenses');
         response['lenses'].forEach((lense) => {
             const newOption = document.createElement('option');
             newOption.textContent = lense;
             menuLenses.appendChild(newOption)
         });
-    });
+        
+        menuLenses.addEventListener('change', function(e) {
+            e.preventDefault();
+            productLense = e.target.value;
+        })
+    })
+//quantité de produit
+let productQty = 1;
+productCard()
+    .then(function(response) {
+        document.getElementById('quantité').addEventListener('change', function(e) {
+            e.preventDefault();
+            productQty = e.target.value;
+        })
+    })
 
+//fonction panier
+const btnPanier = document.getElementById("ajout-panier");
+productCard()
+    .then(function(response) {
+        btnPanier.addEventListener('click', function(e) {
+            e.preventDefault();
+            //verifie si le client à choisi une lentille
+            if (!productLense) {
+                alert("Vous devez choisir une lentille");
+                return
+            }
+            //créer l'objet
+            let panierObj = (JSON.stringify({
+                id: response["_id"],
+                name: response["name"],
+                price: response["price"],
+                imageUrl: response["imageUrl"],
+                lense: productLense,
+                quantity: productQty
+            }))
+            //envoie l'objet dans le localStorage
+            const numeroLigne = "panier" + (localStorage.length + 1);
+            localStorage.setItem(numeroLigne, panierObj)
+            console.log(localStorage);
+        });
+    })
 
-
-function panier() {
-    console.log(productObj);
-    
-};
 window.onload = productCard;
 
-const btnPanier = document.getElementById("ajout-panier");
-btnPanier.addEventListener('click', panier);
+
+

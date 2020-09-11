@@ -27,7 +27,7 @@
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a class="navbar-brand" href="index.html">
-                    <img src="img/Logo Orinoco.png" alt="Logo" width="64" height="30">
+                    <img src="img/Logo Orinoco.png" alt="Logo" width="100" height="60">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
                     <span class="navbar-toggler-icon"></span>
@@ -55,14 +55,16 @@
       </div>
       <!-- /.col-lg-12 -->
     </div>
-    <div class="row justify-content-sm-between">
-      <div class="col-6">
-        <form action="" class="">
-          <label for="lenses">Lentilles disponibles:</label>
-          <select name="lenses" id="lenses"></select>
+    <div class="row">
+      <div class="col-10 col-md-8 ">
+        <form>
+          <label for="lenses">Lentille :</label>
+          <select name="lenses" id="lenses">
+            <option>Choisir</option>
+          </select>
           <label for="quantité">Quantité</label>
-          <select name="quantité">
-            <option value="1">1</option>
+          <select name="quantité" id="quantité">
+            <option value="1" selected>1</option>
             <option value="2">2</option>
             <option value="3">3</option>
             <option value="4">4</option>
@@ -70,7 +72,7 @@
           </select>
         </form>
       </div> 
-      <button type="button" class="btn btn-secondary" id="ajout-panier">Ajoutez au panier</button>
+      <button type="button" class="btn btn-secondary col-10 col-md-3" id="ajout-panier">Ajoutez au panier</button>
     </div>
 
   </div>
