@@ -2,21 +2,18 @@ const listeProduits = document.getElementById('main-list');
 
 //récupération des infos sur les produits et affichage dynamique des éléments
 function retrieveProductList() {
-    let request = new XMLHttpRequest;
+    const request = new XMLHttpRequest;
     request.open("GET", "http://localhost:3000/api/cameras");
     request.send();
     request.onreadystatechange = function() {
         if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let productList = JSON.parse(this.responseText);
-            if (listeProduits.hasChildNodes()) {
-                let child = document.getElementById('product-list');
-                listeProduits.removeChild(child);
-            }
+            const productList = JSON.parse(this.responseText);
+            
             productList.forEach(product => {
-                let newContainer = document.createElement("div");
-                let newLink = document.createElement("a");
-                let newImg = document.createElement("img");
-                let newLabel = document.createElement("p");
+                const newContainer = document.createElement("div");
+                const newLink = document.createElement("a");
+                const newImg = document.createElement("img");
+                const newLabel = document.createElement("p");
                 newContainer.classList.add('col-lg-3', 'col-md-4', 'mb-4');
                 newImg.setAttribute('src', product.imageUrl);
                 newImg.classList.add('card');

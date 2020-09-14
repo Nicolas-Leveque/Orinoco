@@ -28,10 +28,10 @@ function productCard() {
             if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                 resolve(JSON.parse(this.responseText));
                 let response = JSON.parse(this.responseText)
-                };
             };
-        });
-    };
+        };
+    });
+};
 
 //création de  la carte produit
 
@@ -80,11 +80,10 @@ productCard()
                 alert("Vous devez choisir une lentille");
                 return
             }
+            
             //créer l'objet
             let panierObj = (JSON.stringify({
                 id: response["_id"],
-                name: response["name"],
-                price: response["price"],
                 lense: productLense,
                 quantity: productQty
             }))
@@ -92,6 +91,7 @@ productCard()
             const numeroLigne = "panier" + localStorage.length;
             localStorage.setItem(numeroLigne, panierObj)
             console.log(localStorage);
+            alert("le produit a été ajouté au panier")
         });
     })
 
