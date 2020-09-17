@@ -7,14 +7,18 @@ const idProduct = urlParam.get('id');
 //créations des éléments dynamique
 
 let newCard = document.createElement('div');
+newCard.classList.add('card', 'mt-4');
+
 let newImg = document.createElement('img');
+newImg.classList.add('card-img-top','img-fluid');
+
 let newCardBody = document.createElement('div');
 newCardBody.innerHTML = "<h3 class='card-title'></h3><h4></h4><p></p>";
+
 newCard.appendChild(newImg);
 newCard.appendChild(newCardBody);
 document.getElementById('product-card').appendChild(newCard);
-newCard.classList.add('card', 'mt-4');
-newImg.classList.add('card-img-top','img-fluid');
+
 const newCBText = newCardBody.children;
 
 //récupération des données de produit et retour d'une promesse
@@ -65,7 +69,7 @@ productCard()
     .then(function(response) {
         document.getElementById('quantité').addEventListener('change', function(e) {
             e.preventDefault();
-            productQty = e.target.value;
+            productQty = parseInt(e.target.value);
         })
     })
 
@@ -79,19 +83,24 @@ productCard()
             if (!productLense) {
                 alert("Vous devez choisir une lentille");
                 return
-            }
-            
+            }            
             //créer l'objet
-            let panierObj = (JSON.stringify({
+            let panierObj = ({
                 id: response["_id"],
                 lense: productLense,
                 quantity: productQty
-            }))
-            //envoie l'objet dans le localStorage
-            const numeroLigne = "panier" + localStorage.length;
-            localStorage.setItem(numeroLigne, panierObj)
-            console.log(localStorage);
-            alert("le produit a été ajouté au panier")
+            })
+            //verifie si le produit est déjà dans le localStorage, si oui mets à jour la quantité
+            if(!localStorage.getItem(response._id)) {
+                localStorage.setItem(response._id, JSON.stringify(panierObj));
+                alert("Produit ajouté au panier")
+            }else {
+                let tmpProduct = JSON.parse(localStorage.getItem(response._id));
+                let tmpQty = panierObj.quantity + tmpProduct.quantity;
+                panierObj.quantity = tmpQty;
+                localStorage.setItem(response._id, JSON.stringify(panierObj));
+                alert("Produit ajouté au panier")
+            }
         });
     })
 

@@ -47,30 +47,25 @@
 
   <!-- Page Content -->
   <div class="container">
-
+    <!--Carte du produit-->
     <div class="row">
-      <div class="col-lg-12" id="product-card">
+      <div class="col-lg-8 col-md-7 mx-auto" id="product-card">
       </div>
-      <!-- /.col-lg-12 -->
     </div>
+    <!--Selection supplémentaire-->
     <div class="row">
-      <div class="col-10 col-md-8 ">
+      <div class="col-8 col-md-5 mx-auto">
         <form>
           <label for="lenses">Lentille :</label>
           <select name="lenses" id="lenses">
             <option>Choisir</option>
           </select>
           <label for="quantité">Quantité</label>
-          <select name="quantité" id="quantité">
-            <option value="1" selected>1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-          </select>
+          <input type="number" name="quantité" id="quantité" value="1">
+          
         </form>
       </div> 
-      <button type="button" class="btn btn-secondary col-10 col-md-3" id="ajout-panier">Ajoutez au panier</button>
+      <button type="button" class="btn btn-secondary col-2 mx-auto" id="ajout-panier">Ajoutez au panier</button>
     </div>
 
   </div>
@@ -79,11 +74,9 @@
     <div class="container">
       <p class="m-0 text-center text-black">Copyright &copy; Your Website 2020</p>
     </div>
-    <!-- /.container -->
   </footer>
-  <!-- /.container -->
   <!-- Bootstrap core JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS  -->
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
@@ -93,3 +86,13 @@
 </body>
 
 </html>
+
+<!--
+<select name="quantité" id="quantité">
+  <option value="1" selected>1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+  <option value="4">4</option>
+  <option value="5">5</option>
+</select>
+-->
