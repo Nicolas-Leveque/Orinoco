@@ -11,7 +11,6 @@ function panier() {
     }
     //pour chaque élément de l'array envoie une requête vers le serveur pour récupérer les données manquante et rempli le tableau html
     panierArray.forEach((product) => {        
-        return new Promise((resolve, reject) => {
         let request = new XMLHttpRequest();
         request.open("GET", `http://localhost:3000/api/cameras/${product.id}`);
         request.send();
@@ -22,18 +21,12 @@ function panier() {
                 const newRow = document.createElement("tr");
                 newRow.setAttribute('data-row-id', lignePanier);
                 lignePanier++;
-                newRow.innerHTML = `<th>${response.name}</th><th>${product.lense}</th><th>${response.price/100}</th><th>${product.quantity}</th><th class="linePrice">${(response.price / 100) * product.quantity}</th>`;
+                newRow.innerHTML = `<th>${response.name}</th><th>${product.lense}</th><th>${response.price/100}</th><th>${product.quantity}</th><th class="linePrice">${(response.price / 100) * product.quantity}</th><th><button class="btn btn-ouline-primary btn-sm delete-line">x</button></th>`;
                 infoPanier.appendChild(newRow);              
-                }
-            };
-        })
+            }
+        };
     });
-    const test = document.querySelectorAll('th.linePrice');
-    console.log(test)
-    
 };
-//Affichage du prix total
-
 
 //bouton vider le panier
 document.getElementById("vide-panier").addEventListener("click", function (e) {
@@ -51,10 +44,20 @@ const villeElt =  document.getElementById('ville')
 const emailElt =  document.getElementById('email')
 
 //bouton finaliser la commande
+function validationUserElt() {
 
+}
 document.getElementById("confirm").addEventListener("click", function(e){
     e.preventDefault();
     console.log(prenomElt.value)
 })
 
 window.onload = panier;
+
+//Affichage du prix total
+window.addEventListener('load', (e) => {
+    const test = document.querySelectorAll('th.linePrice')
+    const closeButtons = document.querySelectorAll('.delete-line')
+    console.log(test)
+    console.log(closeButtons)
+})
