@@ -21,6 +21,7 @@ function retrieveLocalStorage() {
     });
 };
 function createBasket(id) {
+    console.log('FCT 1.5')
     //pour chaque élément de l'array envoie une requête vers le serveur pour récupérer les données manquante et créer un array d'objet
     return new Promise((resolve, reject) => {
 
@@ -36,12 +37,14 @@ function createBasket(id) {
                         basket.push(tmpObj);
                         console.log("fct2");
                         console.table(basket);
-                        resolve(basket);
+                        checkStorageTables(panierArray, basket, resolve);
                     };                
             };        
         })
+        
         if (basket != []) {
-            resolve(basket)
+            console.log("fct2.5");
+            //resolve(basket)
         } 
         else {
             reject(Error("raté"));
@@ -49,12 +52,13 @@ function createBasket(id) {
     });
 };
 
-function createHTMLTable (elt){    
-    console.table(elt);
-    console.log("fct3")
+function createHTMLTable (){
+    console.log("fct3")    
+    console.table(basket);
+    
     const infoPanier = document.getElementById("info-panier");
     infoPanier.innerHTML = '';
-    elt.forEach((product) => {
+    basket.forEach((product) => {
         const newRow = document.createElement("tr");
         newRow.innerHTML = 
             `<th>${product.name}</th>
@@ -66,9 +70,17 @@ function createHTMLTable (elt){
             infoPanier.appendChild(newRow);
     });   
 };
+function checkStorageTables(panierBrut, panierFinal, resolve) {
+    console.log('debut')
+    if(panierFinal.length === panierBrut.length) {
+        console.log('resolue')
+        resolve(panierFinal)
+    }
+}
+
 retrieveLocalStorage()
     .then(createBasket(panierArray)
-    .then(createHTMLTable(basket)))
+    .then(createHTMLTable))
 
 //bouton vider le panier
 document.getElementById("vide-panier").addEventListener("click", function (e) {
