@@ -1,5 +1,5 @@
 let panierArray = [];
-let prixTotal = 0;
+let prixTotal;
 let basket = [];
 let productDetails;
 let contact;
@@ -49,26 +49,27 @@ function createBasket() {
         });
     });
 };
-
+const infoPanier = document.getElementById("info-panier");
+const infoPrixTotal = document.getElementById('prixTotal');
 function createHTMLTable (){
     //Affiche le panier sur la page HTML
-    const infoPanier = document.getElementById("info-panier");
+    prixTotal = 0;
     infoPanier.innerHTML = '';
-    basket.forEach((product) => {
-        const newRow = document.createElement("tr");
-        newRow.innerHTML = 
-            `<th>${product.name}</th>
-            <th>${product.lense}</th>
-            <th>${product.price}</th>
-            <th>${product.quantity}</th>
-            <th class="linePrice">${product.price * product.quantity}</th>
-            <th><button class="btn btn-danger btn-sm delete-line">x</button></th>`;
-            infoPanier.appendChild(newRow);
-            let linePrice = document.getElementsByClassName('linePrice');
-            console.log(linePrice)
-            //prixTotal += linePrice.value;
-            //console.log(prixTotal);
-    });   
+        for ( let i=0; i< basket.length; i++) {   
+            const newRow = document.createElement("tr");
+            newRow.setAttribute("id", `row-${i}`)
+            newRow.innerHTML = 
+                `<th>${basket[i].name}</th>
+                <th>${basket[i].lense}</th>
+                <th>${basket[i].price}</th>
+                <th>${basket[i].quantity}</th>
+                <th id="linePrice-${i}">${basket[i].price * basket[i].quantity}</th>
+                <th><button class="btn btn-danger btn-sm delete-line" onclick="deleteLine(${i})">x</button></th>`;
+                infoPanier.appendChild(newRow);
+                let linePrice = document.getElementById(`linePrice-${i}`);
+                prixTotal += parseInt(linePrice.textContent);
+        };
+    infoPrixTotal.innerHTML = prixTotal + "€";
 };
 function checkStorageTables(panierArray, basket, resolve) {
     if(basket.length === panierArray.length) {
@@ -134,19 +135,14 @@ function createBasketArray() {
     })
 }
 function checkoutRequest() {
-    console.log('checkoutRequest1');
-    //sendObj = {contact, products};
     let request = new XMLHttpRequest;
     request.open("POST", "http://localhost:3000/api/cameras/order")
     request.setRequestHeader("Content-Type", "application/json");
     request.send(JSON.stringify(sendObj));
-    console.log('checkoutRequest2');
     request.onreadystatechange = () => {
         if (request.readyState == 4 && request.status == 201) {
             let response = JSON.parse(request.responseText);
-            console.log(response, 'checkoutRequest3');
-        } else {
-            console.log('erreur API');
+            console.log(response);
         }
     }
     
@@ -157,11 +153,14 @@ document.getElementById("confirm").addEventListener("click", (e) => {
     contactInfo();
     createBasketArray();
     sendObj = {contact, products};
-    console.log(sendObj, 'sendObj')
     checkoutRequest();
-    
-    
-    
 });
 
+function deleteLine(line) {
+    localStorage.removeItem(basket[line].id);
+    basket.splice(line, 1);
+    createHTMLTable();
+    console.log(localStorage)
+    
+}
 
