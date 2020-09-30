@@ -1,8 +1,10 @@
 let panierArray = [];
+let prixTotal = 0;
 let basket = [];
 let productDetails;
 let contact;
-let product_id = [];
+let products = [];
+let sendObj;
 function retrieveLocalStorage() {
     //extrait les infos des produits dans le panier et les stock dans un array d'objet
     return new Promise((resolve, reject) => {
@@ -62,6 +64,10 @@ function createHTMLTable (){
             <th class="linePrice">${product.price * product.quantity}</th>
             <th><button class="btn btn-danger btn-sm delete-line">x</button></th>`;
             infoPanier.appendChild(newRow);
+            let linePrice = document.getElementsByClassName('linePrice');
+            console.log(linePrice)
+            //prixTotal += linePrice.value;
+            //console.log(prixTotal);
     });   
 };
 function checkStorageTables(panierArray, basket, resolve) {
@@ -110,7 +116,7 @@ function contactInfo() {
                                 contact = {
                                     firstName: prenomElt.value,
                                     lastName: nomElt.value,
-                                    adress: adresseElt.value,
+                                    address: adresseElt.value,
                                     city: villeElt.value,
                                     email: emailElt.value
                                 }
@@ -121,20 +127,26 @@ function contactInfo() {
             } 
 }
 function createBasketArray() {
-    product_id =[];
+
+    products =[];
     basket.forEach((product) => {
-        product_id.push(product.id)
+        products.push(product.id)
     })
 }
 function checkoutRequest() {
+    console.log('checkoutRequest1');
+    //sendObj = {contact, products};
     let request = new XMLHttpRequest;
     request.open("POST", "http://localhost:3000/api/cameras/order")
     request.setRequestHeader("Content-Type", "application/json");
-    request.send(JSON.stringify(contact), JSON.stringify(product_id));
-    request.onreadystatechange = function() {
-        if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-            let response = this.responseText;
-            console.log(response);
+    request.send(JSON.stringify(sendObj));
+    console.log('checkoutRequest2');
+    request.onreadystatechange = () => {
+        if (request.readyState == 4 && request.status == 201) {
+            let response = JSON.parse(request.responseText);
+            console.log(response, 'checkoutRequest3');
+        } else {
+            console.log('erreur API');
         }
     }
     
@@ -144,9 +156,10 @@ document.getElementById("confirm").addEventListener("click", (e) => {
     e.preventDefault();
     contactInfo();
     createBasketArray();
-    console.log(contact);
-    console.log(product_id);
+    sendObj = {contact, products};
+    console.log(sendObj, 'sendObj')
     checkoutRequest();
+    
     
     
 });
