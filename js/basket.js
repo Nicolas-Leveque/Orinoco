@@ -5,15 +5,14 @@ let productDetails;
 let contact;
 let products = [];
 let sendObj;
+let orderDetails;
 function retrieveLocalStorage() {
     //extrait les infos des produits dans le panier et les stock dans un array d'objet
     return new Promise((resolve, reject) => {
         for (let i = 0; i <= localStorage.length - 1 ; i++) {
             if (localStorage.key(i).startsWith("5be")) {
                 panierArray.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-            }else {
-                return
-            };
+            }
         };        
         resolve(panierArray);
         });   
@@ -135,17 +134,19 @@ function createBasketArray() {
     })
 }
 function checkoutRequest() {
-    let request = new XMLHttpRequest;
-    request.open("POST", "http://localhost:3000/api/cameras/order")
-    request.setRequestHeader("Content-Type", "application/json");
-    request.send(JSON.stringify(sendObj));
-    request.onreadystatechange = () => {
-        if (request.readyState == 4 && request.status == 201) {
-            let response = JSON.parse(request.responseText);
-            console.log(response);
+    return new Promise((resolve, reject) => {
+        let request = new XMLHttpRequest;
+        request.open("POST", "http://localhost:3000/api/cameras/order")
+        request.setRequestHeader("Content-Type", "application/json");
+        request.send(JSON.stringify(sendObj));
+        request.onreadystatechange = () => {
+            if (request.readyState == 4 && request.status == 201) {
+                let response = JSON.parse(request.responseText);                
+                orderDetails = response;
+                resolve(orderDetails);
+            }
         }
-    }
-    
+    })
 }
 
 document.getElementById("confirm").addEventListener("click", (e) => {
@@ -153,7 +154,9 @@ document.getElementById("confirm").addEventListener("click", (e) => {
     contactInfo();
     createBasketArray();
     sendObj = {contact, products};
-    checkoutRequest();
+    checkoutRequest()
+        .then(orderObj)
+        
 });
 
 function deleteLine(line) {
@@ -161,6 +164,22 @@ function deleteLine(line) {
     basket.splice(line, 1);
     createHTMLTable();
     console.log(localStorage)
+    
+}
+
+function orderObj() {
+    let orderObj = {
+        name: orderDetails.contact.firstName,
+        order: orderDetails.orderId,
+        prix: prixTotal,
+    }
+    if(!localStorage.getItem("order")) {
+        localStorage.setItem("order", JSON.stringify(orderObj))
+        console.log(localStorage)
+        document.location.href="confirmation.html"
+    } else {
+        alert('Vous avez déjà une commande en cours de traitement')
+    }
     
 }
 
