@@ -14,6 +14,7 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
   <!--Custom CSS-->
   <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/1eb20c6e80.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -55,19 +56,17 @@
     <!--Selection supplémentaire-->
     <div class="row">
       <div class="col-8 col-md-5 mx-auto">
-        <form>
           <label for="lenses">Lentille :</label>
           <select name="lenses" id="lenses">
             <option>Choisir</option>
-          </select>
-          <label for="quantité">Quantité</label>
+          </select>     
+      </div>
+      <div class="col-8 col-md-5 mx-auto">
+        <label for="quantité">Quantité</label>
           <input type="number" name="quantité" id="quantité" value="1">
-          
-        </form>
-      </div> 
-      <button type="button" class="btn btn-secondary col-2 mx-auto" id="ajout-panier">Ajoutez au panier</button>
+        <button type="button" class="btn btn-secondary" id="ajout-panier"><i class="fas fa-cart-plus"></i></button>  
+      </div>      
     </div>
-
   </div>
   <!-- Footer -->
   <footer class="mt-5 py-5">
@@ -86,13 +85,3 @@
 </body>
 
 </html>
-
-<!--
-<select name="quantité" id="quantité">
-  <option value="1" selected>1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-</select>
--->

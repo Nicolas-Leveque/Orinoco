@@ -22,3 +22,4 @@ function displayPage() {
 }
 getOrderDetails()
     .then(displayPage);
+localStorage.clear();
