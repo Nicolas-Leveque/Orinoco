@@ -1,0 +1,14 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: $primary-color;
+    width: 90%;
+    height: auto;
+    padding: 5%;
+    & i {
+        font-size: 1.7rem;
+        margin-top: 8px;
+        color: $secondary-color;
+    }
+}

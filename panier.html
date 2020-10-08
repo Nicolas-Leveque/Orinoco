@@ -3,104 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panier</title>
-    <meta name="description" content="">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> 
-    <link rel="stylesheet" href="style.css">
+    <title>Orinoco</title>
+    <meta name="description" content=""> 
     <script src="https://kit.fontawesome.com/1eb20c6e80.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="scss/panier.css">
 </head>
 <body>
     <header>
-        <div class="container">
-            <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-                    <a class="navbar-brand" href="index.html">
-                        <img src="img/Logo Orinoco.png" alt="Logo" width="100" height="60">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div id="navbarContent" class="collapse navbar-collapse">
-                        <ul class="navbar-nav">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="index.html">Accueil</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="panier.html">Panier</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-            </div>
-        </div>
+        <a href="index.html">
+            <img src="img/Logo-orinoco.png" alt="Logo Orinoco" width="100" height="60">
+        </a>
+        <a href="panier.html">
+            <i class="fas fa-shopping-cart"></i>
+            <span id="nbre-item"></span>
+        </a>
     </header>
-    <div class="container">
-        <div class="row">
-            <h1>Panier</h1>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Nom du produit</th>
-                        <th>Lentilles</th>
-                        <th>Prix unitaire</th>
-                        <th>Quantité</th>
-                        <th>Prix</th>
-                    </tr>
-                </thead>
-                <tbody id="info-panier">
+    <main>
+        <div id="main-content">
+            <form action="">
+                <div class="form-contact">
+                    <label for="firstName">Prénom</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-contact">
+                    <label for="lastName">Nom</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-contact">
+                    <label for="adress">Adresse</label>
+                    <input type="text" id="adress" required>
+                </div>
+                <div class="form-contact">
+                    <label for="city">Ville</label>
+                    <input type="text" id="city" required>
+                </div>
+                <div class="form-contact">
+                    <label for="email">eMail</label>
+                    <input type="email" id="email" required>
+                </div>
+            </form>
+            <div class="tableau">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom du produit</th>
+                            <th>Lentille</th>
+                            <th>Prix Unitaire</th>
+                            <th>Quantité</th>
+                            <th>Prix</th>
+                        </tr>
+                    </thead>
+                    <tbody id="panier">
 
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+                
+                
+            </div>   
         </div>
-        <div class="row my-5 justify-content-end">
-            <p>Prix Total: </p><p id="prixTotal"></p>
+        <div id="control">
+            <button id="vide-panier">Vider le panier</button>
+            <button id="confirm">Commander</button>
+            <div><p>Prix total: <span id="prix-total"></span> €</p><div>
         </div>
-        <div class="row my-5 justify-content-end">
-            <button id="vide-panier" type="button" class="btn btn-secondary col-3 ">Vider le panier</button>
-        </div>
-        <div class="row">
-            <div class="col-6 mx-auto">
-                <form action="">
-                    <div class="form-group">
-                        <label for="prenom">Prenom</label>
-                        <input class="form-control" type="text" id="prenom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nom">Nom</label>
-                        <input class="form-control" type="text" id="nom" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="adresse">adresse</label>
-                        <input class="form-control" type="text" id="adresse" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="ville">Ville</label>
-                        <input class="form-control" type="text" id="ville" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">email</label>
-                        <input class="form-control" type="email" id="email" required>
-                    </div>
-                </form>
-            </div>    
-        </div>
-        <div class="row mt-5 justify-content-end">
-            <button id="confirm" type="button" class="btn btn-secondary col-3">Commander</button>            
-        </div>   
-        
-    </div>
-     <!-- Footer -->
-    <footer class="mt-5 py-5">
-        <div class="container">
-            <p class="m-0 text-center text-black">Copyright &copy; Your Website 2020</p>
-        </div>
-    <!-- /.container -->
-     </footer>
-    <!-- jQuery first, then Popper.js, then Bootstrap JS  -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script> 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    
+    </main>
+    <footer>
+        <p>Copyright &copy; Orinoco 2020</p>
+    </footer>
     <script src="js/basket.js"></script>    
 </body>
 </html>

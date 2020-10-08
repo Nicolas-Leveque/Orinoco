@@ -1,0 +1,9 @@
+footer {
+    padding: auto;
+    display: flex;
+    justify-content: center;
+    & p {
+        padding: auto;
+        color: black;
+    }
+}

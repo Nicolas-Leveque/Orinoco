@@ -4,23 +4,6 @@ const queryString = window.location.search;
 const urlParam = new URLSearchParams(queryString);
 const idProduct = urlParam.get('id');
 
-//créations des éléments dynamique
-
-let newCard = document.createElement('div');
-newCard.classList.add('card', 'mt-4');
-
-let newImg = document.createElement('img');
-newImg.classList.add('card-img-top','img-fluid');
-
-let newCardBody = document.createElement('div');
-newCardBody.innerHTML = "<h3 class='card-title'></h3><h4></h4><p></p>";
-
-newCard.appendChild(newImg);
-newCard.appendChild(newCardBody);
-document.getElementById('product-card').appendChild(newCard);
-
-const newCBText = newCardBody.children;
-
 //récupération des données de produit et retour d'une promesse
 
 function productCard() {
@@ -37,18 +20,42 @@ function productCard() {
     });
 };
 
+//créations des éléments dynamique
+
+const prodName = document.createElement('h3');
+const prodPrice = document.createElement('p');
+const prodDescription = document.createElement('p');
+const prodLense = document.createElement('div');
+const prodQty = document.createElement('div');
+const prodImg = document.createElement('img');
+
+prodLense.innerHTML = "<label for='lenses'>Lentille :</label><select name='lenses' id='lenses'><option>Choisir</option></select>";
+prodQty.innerHTML = "<label for='quantity'>Quantité</label><input type='number' name='quantity' id='quantity' value='1'>";
+
 //création de  la carte produit
 
+const prodCard = document.getElementById('info');
+prodCard.appendChild(prodName);
+prodCard.appendChild(prodDescription);
+prodCard.appendChild(prodLense);
+prodCard.appendChild(prodQty);
+prodCard.appendChild(prodPrice);
+
+const prodPhoto = document.getElementById('photo');
+prodPhoto.appendChild(prodImg);
+
+//Affichage de la carte produit
+let productLense;
 productCard()
     .then(function(response) {
-        newImg.setAttribute('src', response['imageUrl']);
-        newCBText[0].textContent = response['name'];
-        newCBText[1].textContent = response['price'] / 100 +" €";
-        newCBText[2].textContent = response['description'];
+        prodImg.setAttribute('src', response['imageUrl']);
+        prodName.textContent = response['name'];
+        prodPrice.textContent = response['price'] / 100 +" €";
+        prodDescription.textContent = response['description'];
     });
 
 //Choix de la lentille
-let productLense;
+
 productCard()
     .then(function(response) {
         const menuLenses = document.getElementById('lenses');
@@ -67,7 +74,7 @@ productCard()
 let productQty = 1;
 productCard()
     .then(function(response) {
-        document.getElementById('quantité').addEventListener('change', function(e) {
+        document.getElementById('quantity').addEventListener('change', function(e) {
             e.preventDefault();
             productQty = parseInt(e.target.value);
         })
@@ -102,9 +109,7 @@ productCard()
                 alert("Produit ajouté au panier")
             }
         });
-    })
-
-window.onload = productCard;
+    });
 
 
 

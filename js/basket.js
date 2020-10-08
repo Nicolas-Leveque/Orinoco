@@ -1,4 +1,4 @@
-let panierArray = [];
+//let panierArray = [];
 let prixTotal;
 let basket = [];
 let productDetails;
@@ -6,6 +6,7 @@ let contact;
 let products = [];
 let sendObj;
 let orderDetails;
+let panierArray =[];
 function retrieveLocalStorage() {
     //extrait les infos des produits dans le panier et les stock dans un array d'objet
     return new Promise((resolve, reject) => {
@@ -17,6 +18,9 @@ function retrieveLocalStorage() {
         resolve(panierArray);
         });   
 };
+
+
+
 function getProductsDetails() {
     //envoie une requête pour récupérer les infos produits
     return new Promise((resolve, reject) => {                
@@ -48,8 +52,8 @@ function createBasket() {
         });
     });
 };
-const infoPanier = document.getElementById("info-panier");
-const infoPrixTotal = document.getElementById('prixTotal');
+const infoPanier = document.getElementById("panier");
+const infoPrixTotal = document.getElementById('prix-total');
 function createHTMLTable (){
     //Affiche le panier sur la page HTML
     prixTotal = 0;
@@ -63,12 +67,12 @@ function createHTMLTable (){
                 <th>${basket[i].price}</th>
                 <th>${basket[i].quantity}</th>
                 <th id="linePrice-${i}">${basket[i].price * basket[i].quantity}</th>
-                <th><button class="btn btn-danger btn-sm delete-line" onclick="deleteLine(${i})">x</button></th>`;
+                <th><button onclick="deleteLine(${i})">X</button></th>`;
                 infoPanier.appendChild(newRow);
                 let linePrice = document.getElementById(`linePrice-${i}`);
                 prixTotal += parseInt(linePrice.textContent);
         };
-    infoPrixTotal.innerHTML = prixTotal + "€";
+    infoPrixTotal.innerHTML = prixTotal;
 };
 function checkStorageTables(panierArray, basket, resolve) {
     if(basket.length === panierArray.length) {
@@ -92,46 +96,46 @@ document.getElementById("vide-panier").addEventListener("click", function (e) {
 
 function contactInfo() {
     //récupération des données du formulaire et création d'un objet de contact
-    const prenomElt =  document.getElementById('prenom');
-    const nomElt =  document.getElementById('nom');
-    const adresseElt =  document.getElementById('adresse');
-    const villeElt =  document.getElementById('ville');
+    const prenomElt =  document.getElementById('firstName');
+    const nomElt =  document.getElementById('lastName');
+    const adresseElt =  document.getElementById('adress');
+    const villeElt =  document.getElementById('city');
     const emailElt =  document.getElementById('email');
     
     if (!/[a-z]/i.test(prenomElt.value)) {
         return
-        } else {
-            if (!/[a-z]/i.test(nomElt.value)) {
-                return
-            } else {
-                if (!/[a-z]/i.test(adresseElt.value)) {
-                    return
-                } else {
-                    if (!/[a-z]/i.test(villeElt.value)) {
-                        return
-                    } else {
-                        if (!/[a-z]/i.test(emailElt.value)) {
-                            return
-                            } else {
-                                contact = {
-                                    firstName: prenomElt.value,
-                                    lastName: nomElt.value,
-                                    address: adresseElt.value,
-                                    city: villeElt.value,
-                                    email: emailElt.value
-                                }
-                            }
-                        }
-                    }           
-                }
-            } 
+    }
+    if (!/[a-z]/i.test(nomElt.value)) {
+        return
+    }
+    if (!/[a-z]/i.test(adresseElt.value)) {
+        return
+    }
+    if (!/[a-z]/i.test(villeElt.value)) {
+        return
+    }
+    if (!/[a-z]+@+[a-z]+\.+[a-z]/i.test(emailElt.value)) {
+        alert('email invalide')
+        return
+    }
+    contact = {
+        firstName: prenomElt.value,
+        lastName: nomElt.value,
+        address: adresseElt.value,
+        city: villeElt.value,
+        email: emailElt.value
+    }  
 }
 function createBasketArray() {
-
-    products =[];
-    basket.forEach((product) => {
-        products.push(product.id)
-    })
+    if (basket === []){
+        alert("Le panier est vide")
+        return
+    } else {
+        products =[];
+        basket.forEach((product) => {
+            products.push(product.id)
+        })
+    }
 }
 function checkoutRequest() {
     return new Promise((resolve, reject) => {
@@ -154,6 +158,7 @@ document.getElementById("confirm").addEventListener("click", (e) => {
     contactInfo();
     createBasketArray();
     sendObj = {contact, products};
+    console.log(sendObj)
     checkoutRequest()
         .then(orderObj)
         
@@ -162,9 +167,7 @@ document.getElementById("confirm").addEventListener("click", (e) => {
 function deleteLine(line) {
     localStorage.removeItem(basket[line].id);
     basket.splice(line, 1);
-    createHTMLTable();
-    console.log(localStorage)
-    
+    createHTMLTable();    
 }
 
 function orderObj() {
@@ -182,4 +185,3 @@ function orderObj() {
     }
     
 }
-

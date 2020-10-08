@@ -1,0 +1,14 @@
+#main-content {
+    display: flex;
+    flex-direction: row;
+
+}
+#control {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    & button {
+        background-color: beige;
+        border-radius: 15%;
+    }
+}

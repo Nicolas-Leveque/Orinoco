@@ -1,0 +1,23 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 200px;
+    padding: 2%;
+    & .product {
+        height: 180px;
+        background-color: white;
+    }
+    & img {
+        width: 90%;
+        margin: auto;
+
+    }
+    & .product-name {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1%;
+
+    }
+}

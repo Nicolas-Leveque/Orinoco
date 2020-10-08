@@ -6,7 +6,7 @@
     <title>Orinoco</title>
     <meta name="description" content=""> 
     <script src="https://kit.fontawesome.com/1eb20c6e80.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="scss/confirm.css">
+    <link rel="stylesheet" href="scss/produit.css">
 </head>
 <body>
     <header>
@@ -19,15 +19,19 @@
         </a>
     </header>
     <main>
-        <h1>Félicitation <span id="client-name"></span></h1>
-        <p>Merci pour votre commande n°<span id="order"></span> d'un montant de <span id="prix-total"></span>€</p>
-        <p></p>
-
+        <div id="fiche-produit">
+            <div id="info"></div>
+            <div id="photo"></div>
+        </div>
+        <div id="confirm">
+            <p>Ajouter au panier</p>
+            <button id="ajout-panier"><i class="fas fa-cart-plus"></i></button>
+        </div>
     </main>
     <footer>
         <p>Copyright &copy; Orinoco 2020</p>
     </footer>
 
-    <script src="js/confirm.js"></script>    
+    <script src="js/product.js"></script>    
 </body>
 </html>

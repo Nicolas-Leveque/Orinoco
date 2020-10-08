@@ -1,0 +1,32 @@
+#fiche-produit {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap-reverse;
+    justify-content: space-evenly;
+}
+#info {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    justify-content: space-evenly;
+}
+#photo {
+    width: 40%;
+    & img {
+        width: 90%;
+    }
+}
+#confirm {
+    margin-left: 10%;
+    padding: 5%;
+    display: flex;
+    flex-direction: row;
+    
+}
+#ajout-panier {
+    font-size: 1.3rem;
+    padding: 1%;
+    background-color: beige;
+    border-radius: 15%;
+    margin-left: 2%;
+}

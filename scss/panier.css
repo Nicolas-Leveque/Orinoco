@@ -1,0 +1,116 @@
+body {
+  background-color: #f3e9f1;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background-color: #f3e9f1;
+  width: 90%;
+  height: auto;
+  padding: 5%;
+}
+
+header i {
+  font-size: 1.7rem;
+  margin-top: 8px;
+  color: #a435f1;
+}
+
+footer {
+  padding: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+footer p {
+  padding: auto;
+  color: black;
+}
+
+#main-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+#control {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+#control button {
+  background-color: beige;
+  border-radius: 15%;
+}
+
+.tableau {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: end;
+  width: 60%;
+}
+
+table {
+  width: 100%;
+}
+
+table button {
+  background-color: red;
+  border-radius: 20%;
+}
+
+tbody th {
+  margin-top: 10%;
+  font-weight: normal;
+}
+
+form {
+  display: table;
+  padding: 3%;
+  width: 30%;
+}
+
+.form-contact {
+  display: table-row;
+}
+
+label, input {
+  display: table-cell;
+  margin: 2%;
+}
+/*# sourceMappingURL=panier.css.map */
