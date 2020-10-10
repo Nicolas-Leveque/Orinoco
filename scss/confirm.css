@@ -30,6 +30,22 @@ header i {
   color: #a435f1;
 }
 
+#red-dot {
+  position: relative;
+  right: -20px;
+  top: -35px;
+  visibility: hidden;
+  background-color: #e53935;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+#nbre-item {
+  vertical-align: middle;
+}
+
 main {
   display: -webkit-box;
   display: -ms-flexbox;

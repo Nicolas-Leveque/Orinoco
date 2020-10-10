@@ -12,3 +12,18 @@ header {
         color: $secondary-color;
     }
 }
+#red-dot {
+    position: relative;
+    right: -20px;
+    top: -35px;
+    visibility: hidden;
+    background-color: $alert-color;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    text-align: center;
+}
+#nbre-item {
+    vertical-align: middle;
+
+}

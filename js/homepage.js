@@ -1,5 +1,5 @@
 //récupération des infos sur les produits et affichage dynamique des éléments
-let productList;
+let productList = [];
 function retrieveProductList() {
     return new Promise((resolve, reject) => {
         const request = new XMLHttpRequest;
@@ -28,9 +28,9 @@ function displayProduct() {
         newImg.classList.add('card');
 
         const newLabel = document.createElement("p");
-         newLabel.setAttribute('class', 'product-name');
+        newLabel.setAttribute('class', 'product-name');
         newLabel.innerHTML = `<div>${product.name}</div><div>${product.price/100} €</div>` ;
-                       
+
         newLink.appendChild(newImg);
         newLink.appendChild(newLabel);
         newContainer.appendChild(newLink);
@@ -38,6 +38,6 @@ function displayProduct() {
         const listeProduits = document.getElementById('main-list');
         listeProduits.appendChild(newContainer);               
     });
-}
+};
 retrieveProductList()
     .then(displayProduct);
