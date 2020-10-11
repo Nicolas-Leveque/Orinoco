@@ -7,13 +7,12 @@ let Cart = {
                 if (localStorage.key(i).startsWith("5be")) {
                     this.items.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
                 }
-            };        
+            };
             resolve(this.items);
             this.afterInit()
-            });   
+        });   
     },
     afterInit : function() {
-
     }
 };
 

@@ -38,7 +38,7 @@ function showProduct(response) {
     prodCard.appendChild(prodLense);
     prodCard.appendChild(prodQty);
     prodCard.appendChild(prodPrice);
-        
+    
     //affichage des éléments
     const prodPhoto = document.getElementById('photo');
     prodPhoto.appendChild(prodImg);
@@ -62,12 +62,12 @@ function showProduct(response) {
     productLense = e.target.value;
     })
     //quantité de produit
-        
+    
     document.getElementById('quantity').addEventListener('change', function(e) {
     e.preventDefault();
     productQty = parseInt(e.target.value);
     });
-        
+    
 };
 
 productCard()
@@ -91,14 +91,13 @@ btnPanier.addEventListener('click', function(e) {
     //verifie si le produit est déjà dans le localStorage, si oui mets à jour la quantité
     if(!localStorage.getItem(responseReq._id)) {
         localStorage.setItem(responseReq._id, JSON.stringify(panierObj));
-        alert("Produit ajouté au panier")
     }else {
         let tmpProduct = JSON.parse(localStorage.getItem(responseReq._id));
         let tmpQty = panierObj.quantity + tmpProduct.quantity;
         panierObj.quantity = tmpQty;
         localStorage.setItem(responseReq._id, JSON.stringify(panierObj));
-        alert("Produit ajouté au panier")
     }
+    
 });
 
 

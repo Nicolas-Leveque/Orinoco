@@ -14,7 +14,7 @@ function retrieveLocalStorage() {
             if (localStorage.key(i).startsWith("5be")) {
                 panierArray.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
             }
-        };        
+        };   
         resolve(panierArray);
         });   
 };
@@ -92,7 +92,7 @@ document.getElementById("vide-panier").addEventListener("click", function (e) {
     panierArray = [];
     basket = [];
     window.location.reload();
-  });
+});
 
 function contactInfo() {
     //récupération des données du formulaire et création d'un objet de contact
