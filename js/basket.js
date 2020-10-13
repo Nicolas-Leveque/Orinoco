@@ -95,7 +95,7 @@ document.getElementById("vide-panier").addEventListener("click", function (e) {
 });
 
 function contactInfo() {
-    //récupération des données du formulaire et création d'un objet de contact
+    //récupération et vérification des données du formulaire et création d'un objet de contact
     const prenomElt =  document.getElementById('firstName');
     const nomElt =  document.getElementById('lastName');
     const adresseElt =  document.getElementById('adress');
@@ -126,6 +126,7 @@ function contactInfo() {
         email: emailElt.value
     }  
 }
+//Verifie si il y a des produits dans le panier et créer un array avec les id pour envoyer à l'API
 function createBasketArray() {
     if (basket === []){
         alert("Le panier est vide")
@@ -152,24 +153,23 @@ function checkoutRequest() {
         }
     })
 }
-
+//Envoie la requête POST à l'API et récupère les infos de commande
 document.getElementById("confirm").addEventListener("click", (e) => {
     e.preventDefault();
     contactInfo();
     createBasketArray();
     sendObj = {contact, products};
-    console.log(sendObj)
     checkoutRequest()
         .then(orderObj)
         
 });
-
+// Efface une ligne du panier
 function deleteLine(line) {
     localStorage.removeItem(basket[line].id);
     basket.splice(line, 1);
     createHTMLTable();    
 }
-
+//récupère les infos de commande et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
 function orderObj() {
     let orderObj = {
         name: orderDetails.contact.firstName,
@@ -183,5 +183,4 @@ function orderObj() {
     } else {
         alert('Vous avez déjà une commande en cours de traitement')
     }
-    
 }

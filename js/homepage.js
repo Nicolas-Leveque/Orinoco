@@ -1,21 +1,6 @@
-//récupération des infos sur les produits et affichage dynamique des éléments
-let productList = [];
-function retrieveProductList() {
-    return new Promise((resolve, reject) => {
-        const request = new XMLHttpRequest;
-        request.open("GET", "http://localhost:3000/api/cameras");
-        request.send();
-        request.onreadystatechange = function() {
-            if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
-                productList = JSON.parse(this.responseText);
-                resolve(productList);        
-            }
-        }
-    })
-};
 function displayProduct() {
     //création des éléments dynamique
-    productList.forEach(product => {
+    Request.response.forEach(product => {
         const newContainer = document.createElement("div");
         newContainer.classList.add('card');
 
@@ -39,5 +24,8 @@ function displayProduct() {
         listeProduits.appendChild(newContainer);               
     });
 };
-retrieveProductList()
-    .then(displayProduct);
+//Envoie une requête à l'API et affiche les produits
+Request.afterRequest = displayProduct;
+Request.get("http://localhost:3000/api/cameras");
+
+
