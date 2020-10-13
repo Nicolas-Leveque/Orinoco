@@ -111,6 +111,7 @@ footer p {
 }
 
 #ajout-panier {
+  width: 10%;
   font-size: 1.3rem;
   padding: 1%;
   background-color: beige;

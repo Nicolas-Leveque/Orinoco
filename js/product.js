@@ -91,13 +91,17 @@ btnPanier.addEventListener('click', function(e) {
     //verifie si le produit est déjà dans le localStorage, si oui mets à jour la quantité
     if(!localStorage.getItem(responseReq._id)) {
         localStorage.setItem(responseReq._id, JSON.stringify(panierObj));
+        
     }else {
         let tmpProduct = JSON.parse(localStorage.getItem(responseReq._id));
         let tmpQty = panierObj.quantity + tmpProduct.quantity;
         panierObj.quantity = tmpQty;
         localStorage.setItem(responseReq._id, JSON.stringify(panierObj));
+        
     }
-    
+    Cart.items = [];
+    Cart.afterInit = majIconePanier;
+    Cart.init();
 });
 
 
