@@ -4,12 +4,10 @@ function getOrderDetails() {
     return new Promise((resolve, reject) => {
         if (localStorage.key("order")) {
             order = (JSON.parse(localStorage.getItem("order")))
-            resolve(order)
-            console.log(order)
+            resolve(order);
         }
     }) 
 };
-
 function displayPage() {
     let nameElt = document.getElementById('client-name')
     nameElt.innerHTML = order.name;

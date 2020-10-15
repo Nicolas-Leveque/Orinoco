@@ -4,7 +4,7 @@ function majIconePanier() {
     nbreArticle.innerHTML = '';
     let tmpArticle = [];
     for ( i = 0; i <= Cart.items.length - 1; i++){
-        tmpArticle.push(Cart.items[i].quantity)
+        tmpArticle.push(Cart.items[i].quantity);
     }
     if(Cart.items.length != 0) {
         iconePanier.style.visibility='visible';

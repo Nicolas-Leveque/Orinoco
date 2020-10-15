@@ -1,4 +1,3 @@
-//let panierArray = [];
 let prixTotal;
 let basket = [];
 let productDetails;
@@ -18,9 +17,6 @@ function retrieveLocalStorage() {
         resolve(panierArray);
         });   
 };
-
-
-
 function getProductsDetails() {
     //envoie une requête pour récupérer les infos produits
     return new Promise((resolve, reject) => {                
@@ -78,22 +74,11 @@ function checkStorageTables(panierArray, basket, resolve) {
     if(basket.length === panierArray.length) {
         resolve(basket)
     }
-}
-
+};
 retrieveLocalStorage()
     .then(getProductsDetails()
     .then(createBasket)
     .then(createHTMLTable))
-
-//bouton vider le panier
-document.getElementById("vide-panier").addEventListener("click", function (e) {
-    e.preventDefault();
-    localStorage.clear();
-    panierArray = [];
-    basket = [];
-    window.location.reload();
-});
-
 function contactInfo() {
     //récupération et vérification des données du formulaire et création d'un objet de contact
     const prenomElt =  document.getElementById('firstName');
@@ -102,20 +87,28 @@ function contactInfo() {
     const villeElt =  document.getElementById('city');
     const emailElt =  document.getElementById('email');
     
-    if (!/[a-z]/i.test(prenomElt.value)) {
+    if (!/([a-zA-Z-]){1, 64}/.test(prenomElt.value) || prenomElt.value === '') {
+        console.log("prenom");
+        prenomElt.style.borderColor = 'red';
+        return;
+    }
+    if (!/[a-zA-Z-]{1, 64}/i.test(nomElt.value) || nomElt.value === '') {
+        console.log("nom");
+        nomElt.style.borderColor = 'red';
         return
     }
-    if (!/[a-z]/i.test(nomElt.value)) {
+    if (!/[a-zA-Z0-9]{1, 64}/i.test(adresseElt.value) || adresseElt.value === '') {
+        console.log("adresse");
+        adresseElt.style.borderColor = 'red';
         return
     }
-    if (!/[a-z]/i.test(adresseElt.value)) {
+    if (!/[a-zA-Z]{1, 64}/i.test(villeElt.value) || villeElt.value === '') {
+        console.log("ville");
+        villeElt.style.borderColor = 'red';
         return
     }
-    if (!/[a-z]/i.test(villeElt.value)) {
-        return
-    }
-    if (!/[a-z]+@+[a-z]+\.+[a-z]/i.test(emailElt.value)) {
-        alert('email invalide')
+    if (!/[A-Za-z._%0-9]+@+[A-Za-z0-9.-]+\.+[A-Za-z]/i.test(emailElt.value) || emailElt.value === '') {
+        console.log("email");
         return
     }
     contact = {
@@ -153,22 +146,6 @@ function checkoutRequest() {
         }
     })
 }
-//Envoie la requête POST à l'API et récupère les infos de commande
-document.getElementById("confirm").addEventListener("click", (e) => {
-    e.preventDefault();
-    contactInfo();
-    createBasketArray();
-    sendObj = {contact, products};
-    checkoutRequest()
-        .then(orderObj)
-        
-});
-// Efface une ligne du panier
-function deleteLine(line) {
-    localStorage.removeItem(basket[line].id);
-    basket.splice(line, 1);
-    createHTMLTable();    
-}
 //récupère les infos de commande et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
 function orderObj() {
     let orderObj = {
@@ -178,9 +155,31 @@ function orderObj() {
     }
     if(!localStorage.getItem("order")) {
         localStorage.setItem("order", JSON.stringify(orderObj))
-        console.log(localStorage)
         document.location.href="confirmation.html"
     } else {
         alert('Vous avez déjà une commande en cours de traitement')
     }
 }
+//Le bouton commander envoie la requête POST à l'API et récupère les infos de commande
+document.getElementById("confirm").addEventListener("click", (e) => {
+    e.preventDefault();
+    contactInfo();
+    createBasketArray();
+    sendObj = {contact, products};
+    checkoutRequest()
+        .then(orderObj)
+});
+//bouton vider le panier
+document.getElementById("vide-panier").addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.clear();
+    panierArray = [];
+    basket = [];
+    window.location.reload();
+});
+// Efface une ligne du panier
+function deleteLine(line) {
+    localStorage.removeItem(basket[line].id);
+    basket.splice(line, 1);
+    createHTMLTable();
+};

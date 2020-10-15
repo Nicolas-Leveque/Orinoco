@@ -3,6 +3,9 @@
     flex-direction: column;
     text-align: end;
     width: 60%;
+    @include tablet {
+        width: 80%;
+    }
 }
 table {
     width: 100%;

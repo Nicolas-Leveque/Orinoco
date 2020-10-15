@@ -14,7 +14,7 @@ function displayProduct() {
 
         const newLabel = document.createElement("p");
         newLabel.setAttribute('class', 'product-name');
-        newLabel.innerHTML = `<div>${product.name}</div><div>${product.price/100} €</div>` ;
+        newLabel.innerHTML = `<div>${product.name}</div><div>${product.price/100} €</div>`;
 
         newLink.appendChild(newImg);
         newLink.appendChild(newLabel);

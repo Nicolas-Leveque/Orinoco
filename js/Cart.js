@@ -6,11 +6,11 @@ let Cart = {
             Cart.items = [];
             for (let i = 0; i <= localStorage.length - 1 ; i++) {
                 if (localStorage.key(i).startsWith("5be")) {
-                    this.items.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
+                    this.items.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
                 }
             };
             resolve(this.items);
-            this.afterInit()
+            this.afterInit();
         });   
     },
     afterInit : function() {

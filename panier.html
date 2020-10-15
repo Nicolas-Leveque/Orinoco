@@ -16,7 +16,7 @@
         </a>
         <a href="panier.html">
             <i class="fas fa-shopping-cart"></i>
-            <span id="nbre-item"></span>
+            <div id="red-dot"><span id="nbre-item"></span></div>
         </a>
     </header>
     <main>
@@ -39,9 +39,10 @@
                     <input type="text" id="city" required>
                 </div>
                 <div class="form-contact">
-                    <label for="email">eMail</label>
+                    <label for="email">email</label>
                     <input type="email" id="email" required>
                 </div>
+                <p id="champs-obligatoire">Tous les champs sont obligatoire</p>
             </form>
             <div class="tableau">
                 <table>
@@ -58,19 +59,19 @@
 
                     </tbody>
                 </table>
-                
+                <div><p>Prix total: <span id="prix-total"></span> €</p></div>
                 
             </div>   
         </div>
         <div id="control">
             <button id="vide-panier">Vider le panier</button>
             <button id="confirm">Commander</button>
-            <div><p>Prix total: <span id="prix-total"></span> €</p><div>
         </div>
     </main>
     <footer>
         <p>Copyright &copy; Orinoco 2020</p>
     </footer>
+    <script src="js/Cart.js"></script>
     <script src="js/Request.js"></script>
     <script src="js/basket.js"></script>    
 </body>

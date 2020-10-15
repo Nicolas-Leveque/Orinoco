@@ -1,6 +1,11 @@
 #main-content {
     display: flex;
     flex-direction: row;
+    @include tablet {
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
 
 }
 #control {
@@ -9,6 +14,7 @@
     justify-content: space-evenly;
     & button {
         background-color: beige;
-        border-radius: 15%;
+        border-radius: 10%;
+        height: 50px;
     }
 }

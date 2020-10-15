@@ -2,6 +2,9 @@ form {
     display: table;
     padding: 3%;
     width: 30%;
+    @include tablet {
+        width: 60%;
+    }
 }
 .form-contact {
     display: table-row;
@@ -9,4 +12,8 @@ form {
 label, input {
     display: table-cell;
     margin: 2%;
+}
+#champs-obligatoire {
+    font-size: 0.7rem;
+    color: grey;
 }
