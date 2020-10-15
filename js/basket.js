@@ -87,19 +87,20 @@ function contactInfo() {
     const villeElt =  document.getElementById('city');
     const emailElt =  document.getElementById('email');
     
-    if (!prenomElt.value.match(/[a-zA-Z-]{1,20}/g) || prenomElt.value === '') {
+    if (!prenomElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ-]{1,20}$/g) || prenomElt.value === '') {
         prenomElt.style.borderColor = 'red';
         return;
     }
-    if (!nomElt.value.match(/[a-zA-Z-]{1,20}/g) || nomElt.value === '') {
+    if (!nomElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ-]{1,20}$/g) || nomElt.value === '') {
         nomElt.style.borderColor = 'red';
         return
     }
-    if (!adresseElt.value.match(/[a-zA-Z0-9-]{1,64}/g) || adresseElt.value === '') {
+    if (!adresseElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9-\s]{1,64}$/g) || adresseElt.value === '') {
         adresseElt.style.borderColor = 'red';
         return
     }
-    if (!villeElt.value.match(/[a-zA-Z-]{1,20}/g) || villeElt.value === '') {
+    if (!villeElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ-]{1,20}$/g) || villeElt.value === '') {
+        console.log(villeElt.value);
         villeElt.style.borderColor = 'red';
         return
     }
