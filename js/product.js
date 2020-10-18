@@ -56,8 +56,9 @@ function showProduct() {
     });
 };
 //Envoie un requête à l'API pour récuperer les infos du produit choisi
-Request.afterRequest = showProduct;
-Request.get(`http://localhost:3000/api/cameras/${idProduct}`);
+//Request.afterRequest = showProduct;
+Request.get(`http://localhost:3000/api/cameras/${idProduct}`)
+    .then(showProduct);
 
 //fonction mettre le produit au panier
 const btnPanier = document.getElementById("ajout-panier");
@@ -84,7 +85,9 @@ btnPanier.addEventListener('click', function(e) {
         localStorage.setItem(Request.response._id, JSON.stringify(panierObj));
     };
     //Mets à jour l'icône du header
-    Cart.init();
+    //Cart.afterInit = majIconePanier;
+    Cart.init()
+        .then(majIconePanier);
 });
 
 

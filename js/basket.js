@@ -4,45 +4,17 @@ let productDetails;
 let contact;
 let products = [];
 let sendObj;
-let orderDetails;
-let panierArray =[];
-function retrieveLocalStorage() {
-    //extrait les infos des produits dans le panier et les stock dans un array d'objet
-    return new Promise((resolve, reject) => {
-        for (let i = 0; i <= localStorage.length - 1 ; i++) {
-            if (localStorage.key(i).startsWith("5be")) {
-                panierArray.push(JSON.parse(localStorage.getItem(localStorage.key(i))))
-            }
-        };   
-        resolve(panierArray);
-        });   
-};
-function getProductsDetails() {
-    //envoie une requête pour récupérer les infos produits
-    return new Promise((resolve, reject) => {                
-        let request = new XMLHttpRequest();
-        request.open("GET", `http://localhost:3000/api/cameras/`);
-        request.send();
-        request.onreadystatechange = function () {
-        if (this.readyState == XMLHttpRequest.DONE && this.status)
-            { 
-                productDetails = JSON.parse(this.responseText);
-                resolve(productDetails)
-                };                
-            };        
-            
-    });
-};
+
 function createBasket() {
     //créer un array d'objets contenant les infos nécessaire en combinant les infos tirées du localStorage et celles de l'API
     return new Promise((resolve, reject) => {
-        panierArray.forEach((objectLocal) => {
-            productDetails.forEach((objectProduct) => {
+        Cart.items.forEach((objectLocal) => {
+            Request.response.forEach((objectProduct) => {
                 if(objectLocal.id === objectProduct._id) {
                     let tmpObj = {};
                     tmpObj = {id: objectProduct._id, name: objectProduct.name, lense: objectLocal.lense, quantity: objectLocal.quantity, price: objectProduct.price/100};
                     basket.push(tmpObj);
-                    checkStorageTables(panierArray, basket, resolve);
+                    checkStorageTables(Cart.items, basket, resolve);
                 }
             });
         });
@@ -70,15 +42,17 @@ function createHTMLTable (){
         };
     infoPrixTotal.innerHTML = prixTotal;
 };
-function checkStorageTables(panierArray, basket, resolve) {
-    if(basket.length === panierArray.length) {
+function checkStorageTables(panier, basket, resolve) {
+    if(basket.length === panier.length) {
         resolve(basket)
     }
 };
-retrieveLocalStorage()
-    .then(getProductsDetails()
+
+Cart.init()
+    .then(Request.get('http://localhost:3000/api/cameras/')
     .then(createBasket)
-    .then(createHTMLTable))
+    .then(createHTMLTable));
+
 function contactInfo() {
     //récupération et vérification des données du formulaire et création d'un objet de contact
     const prenomElt =  document.getElementById('firstName');
@@ -128,27 +102,12 @@ function createBasketArray() {
         })
     }
 }
-function checkoutRequest() {
-    return new Promise((resolve, reject) => {
-        let request = new XMLHttpRequest;
-        request.open("POST", "http://localhost:3000/api/cameras/order")
-        request.setRequestHeader("Content-Type", "application/json");
-        request.send(JSON.stringify(sendObj));
-        request.onreadystatechange = () => {
-            if (request.readyState == 4 && request.status == 201) {
-                let response = JSON.parse(request.responseText);                
-                orderDetails = response;
-                resolve(orderDetails);
-            }
-        }
-    })
-}
 //récupère les infos de commande et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
 function orderObj() {
     let orderObj = {
-        name: orderDetails.contact.firstName,
-        order: orderDetails.orderId,
-        prix: prixTotal,
+        name: Request.orderDetails.contact.firstName,
+        order: Request.orderDetails.orderId,
+        prix: prixTotal
     }
     if(!localStorage.getItem("order")) {
         localStorage.setItem("order", JSON.stringify(orderObj))
@@ -163,14 +122,14 @@ document.getElementById("confirm").addEventListener("click", (e) => {
     contactInfo();
     createBasketArray();
     sendObj = {contact, products};
-    checkoutRequest()
+    Request.post()
         .then(orderObj)
 });
 //bouton vider le panier
 document.getElementById("vide-panier").addEventListener("click", function (e) {
     e.preventDefault();
     localStorage.clear();
-    panierArray = [];
+    Cart.items = [];
     basket = [];
     window.location.reload();
 });

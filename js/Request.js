@@ -11,7 +11,6 @@ let Request = {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     Request.response = JSON.parse(this.responseText);
                     resolve(Request.response);
-                    Request.afterRequest();
                 };
             };
         });
@@ -27,13 +26,10 @@ let Request = {
             request.send(JSON.stringify(sendObj));
             request.onreadystatechange = () => {
                 if (request.readyState == 4 && request.status == 201) {
-                    Resquest.orderDetails = JSON.parse(request.responseText);                
+                    Request.orderDetails = JSON.parse(request.responseText);                
                     resolve(Request.orderDetails);
-                    Request.afterRequest();
                 }
             }
         })
-    },
-    afterRequest : function(responseReq) {
     }
 }

@@ -3,6 +3,7 @@ function majIconePanier() {
     const nbreArticle = document.getElementById('nbre-item');
     nbreArticle.innerHTML = '';
     let tmpArticle = [];
+    
     for ( i = 0; i <= Cart.items.length - 1; i++){
         tmpArticle.push(Cart.items[i].quantity);
     }
@@ -12,5 +13,6 @@ function majIconePanier() {
     }
 }
 
-Cart.afterInit = majIconePanier;
-Cart.init();
+//Cart.afterInit = majIconePanier;
+Cart.init()
+    .then(majIconePanier);
