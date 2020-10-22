@@ -55,15 +55,9 @@ function showProduct() {
         productQty = parseInt(e.target.value);
     });
 };
-//Envoie un requête à l'API pour récuperer les infos du produit choisi
-//Request.afterRequest = showProduct;
-Request.get(`http://localhost:3000/api/cameras/${idProduct}`)
-    .then(showProduct);
 
-//fonction mettre le produit au panier
-const btnPanier = document.getElementById("ajout-panier");
-btnPanier.addEventListener('click', function(e) {
-    e.preventDefault();
+//Ajoute le produit au panier
+function ajoutPanier() {
     //verifie si le client à choisi une lentille
     if (!productLense) {
         alert("Vous devez choisir une lentille");
@@ -84,8 +78,19 @@ btnPanier.addEventListener('click', function(e) {
         panierObj.quantity = tmpQty;
         localStorage.setItem(Request.response._id, JSON.stringify(panierObj));
     };
+}
+
+//Envoie un requête à l'API pour récuperer les infos du produit choisi
+//Request.afterRequest = showProduct;
+Request.get(`http://localhost:3000/api/cameras/${idProduct}`)
+    .then(showProduct);
+
+//fonction mettre le produit au panier
+const btnPanier = document.getElementById("ajout-panier");
+btnPanier.addEventListener('click', function(e) {
+    e.preventDefault();
+    ajoutPanier();
     //Mets à jour l'icône du header
-    //Cart.afterInit = majIconePanier;
     Cart.init()
         .then(majIconePanier);
 });

@@ -47,6 +47,12 @@ function checkStorageTables(panier, basket, resolve) {
         resolve(basket)
     }
 };
+// Efface une ligne du panier
+function deleteLine(line) {
+    localStorage.removeItem(basket[line].id);
+    basket.splice(line, 1);
+    createHTMLTable();
+};
 
 Cart.init()
     .then(Request.get('http://localhost:3000/api/cameras/')
@@ -104,13 +110,15 @@ function createBasketArray() {
 }
 //récupère les infos de commande et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
 function orderObj() {
-    let orderObj = {
+    /*let orderObj = {
         name: Request.orderDetails.contact.firstName,
         order: Request.orderDetails.orderId,
         prix: prixTotal
-    }
+    }*/
+    Request.orderDetails.prix = prixTotal;
+    console.log(Request.orderDetails);
     if(!localStorage.getItem("order")) {
-        localStorage.setItem("order", JSON.stringify(orderObj))
+        localStorage.setItem("order", JSON.stringify(Request.orderDetails))
         document.location.href="confirmation.html"
     } else {
         alert('Vous avez déjà une commande en cours de traitement')
@@ -133,9 +141,3 @@ document.getElementById("vide-panier").addEventListener("click", function (e) {
     basket = [];
     window.location.reload();
 });
-// Efface une ligne du panier
-function deleteLine(line) {
-    localStorage.removeItem(basket[line].id);
-    basket.splice(line, 1);
-    createHTMLTable();
-};

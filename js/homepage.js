@@ -25,7 +25,6 @@ function displayProduct() {
     });
 };
 //Envoie une requête à l'API et affiche les produits
-//Request.afterRequest = displayProduct;
 Request.get("http://localhost:3000/api/cameras")
     .then(displayProduct);
 

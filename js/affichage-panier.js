@@ -12,7 +12,6 @@ function majIconePanier() {
         nbreArticle.innerHTML = tmpArticle.reduce((a,b) => a + b, 0);
     }
 }
-
-//Cart.afterInit = majIconePanier;
+//Si le nombre de produit dans Cart.items est diiférent du localStorage mets à jour Cart.items et l'icone du header
 Cart.init()
     .then(majIconePanier);
