@@ -1,6 +1,5 @@
 let prixTotal;
 let basket = [];
-let productDetails;
 let contact;
 let products = [];
 let sendObj;
@@ -108,13 +107,8 @@ function createBasketArray() {
         })
     }
 }
-//récupère les infos de commande et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
+//récupère les infos de commande, ajoute le prix total et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
 function orderObj() {
-    /*let orderObj = {
-        name: Request.orderDetails.contact.firstName,
-        order: Request.orderDetails.orderId,
-        prix: prixTotal
-    }*/
     Request.orderDetails.prix = prixTotal;
     console.log(Request.orderDetails);
     if(!localStorage.getItem("order")) {
