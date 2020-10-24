@@ -8,3 +8,8 @@
         @content;
     }
 }
+@mixin pc {
+    @media all and (minwidth: map-get($breakpoint, tablet)) {
+        @content;
+    }
+}

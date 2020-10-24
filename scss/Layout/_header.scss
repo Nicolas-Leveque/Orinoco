@@ -2,6 +2,7 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
     background-color: $primary-color;
     width: 90%;
     height: auto;
