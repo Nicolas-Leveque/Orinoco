@@ -31,7 +31,6 @@ function createHTMLTable (){
             newRow.innerHTML = 
                 `<th>${basket[i].name}</th>
                 <th>${basket[i].lense}</th>
-                <th>${basket[i].price}</th>
                 <th>${basket[i].quantity}</th>
                 <th id="linePrice-${i}">${basket[i].price * basket[i].quantity}</th>
                 <th><button onclick="deleteLine(${i})">X</button></th>`;

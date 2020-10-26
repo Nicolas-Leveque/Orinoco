@@ -4,12 +4,12 @@
     }
 }
 @mixin mobile {
-    @media all and (maxwidth: map-get($breakpoint, mobile)) {
+    @media all and (max-width: map-get($breakpoint, mobile)) {
         @content;
     }
 }
 @mixin pc {
-    @media all and (maxwidth: map-get($breakpoint, tablet)) {
+    @media all and (max-width: map-get($breakpoint, tablet)) {
         @content;
     }
 }

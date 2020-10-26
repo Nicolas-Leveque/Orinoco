@@ -3,18 +3,21 @@
     flex-direction: column;
     text-align: end;
     width: 60%;
-    @include tablet {
-        width: 80%;
+    @include mobile {
+        width: 95%;
     }
 }
 table {
+    text-align: left;
     width: 100%;
+    border-collapse: collapse;
     & button {
         background-color: red;
         border-radius: 20%;
     }
 }
 tbody th {
+    //border: thin dashed $secondary-color;
     margin-top: 10%;
     font-weight: normal;
 }
