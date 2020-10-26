@@ -18,9 +18,9 @@ header {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   background-color: #f3e9f1;
   width: 90%;
   height: auto;
@@ -29,14 +29,26 @@ header {
 
 header i {
   font-size: 1.7rem;
-  margin-top: 8px;
+  margin: auto;
   color: #a435f1;
+}
+
+header a {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 #red-dot {
   position: relative;
-  right: -20px;
-  top: -35px;
+  right: 8px;
+  top: -12px;
   visibility: hidden;
   background-color: #e53935;
   width: 15px;
@@ -67,10 +79,7 @@ main {
 
 footer {
   margin-top: 20px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
   padding: auto;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -78,12 +87,6 @@ footer {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-}
-
-@media all and (max-width: 800px) {
-  footer {
-    position: relative;
-  }
 }
 
 footer p {
