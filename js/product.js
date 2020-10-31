@@ -48,11 +48,13 @@ function showProduct() {
     menuLenses.addEventListener('change', function(e) {
         e.preventDefault();
         productLense = e.target.value;
+        console.log('productLense', productLense);
     });
     //quantité de produit
     document.getElementById('quantity').addEventListener('change', function(e) {
         e.preventDefault();
         productQty = parseInt(e.target.value);
+        console.log('productQty', productQty);
     });
 };
 
@@ -69,6 +71,7 @@ function ajoutPanier() {
         lense: productLense,
         quantity: productQty
     });
+    console.log('panierObj', panierObj);
     //verifie si le produit est déjà dans le localStorage, si oui mets à jour la quantité
     if(!localStorage.getItem(Request.response._id)) {
         localStorage.setItem(Request.response._id, JSON.stringify(panierObj));

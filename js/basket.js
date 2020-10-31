@@ -42,6 +42,7 @@ function createHTMLTable (){
 };
 function checkStorageTables(panier, basket, resolve) {
     if(basket.length === panier.length) {
+        console.log('basket', basket);
         resolve(basket)
     }
 };
@@ -92,7 +93,8 @@ function contactInfo() {
         address: adresseElt.value,
         city: villeElt.value,
         email: emailElt.value
-    }  
+    }
+    console.log('contact', contact);
 }
 //Verifie si il y a des produits dans le panier et créer un array avec les id pour envoyer à l'API
 function createBasketArray() {
@@ -104,12 +106,13 @@ function createBasketArray() {
         basket.forEach((product) => {
             products.push(product.id)
         })
+        console.log('products', products);
     }
 }
 //récupère les infos de commande, ajoute le prix total et les envoie dans le localStorage avec la key order et redirige vers la page de confirmation
 function orderObj() {
     Request.orderDetails.prix = prixTotal;
-    console.log(Request.orderDetails);
+    console.log('orderDetails', Request.orderDetails);
     if(!localStorage.getItem("order")) {
         localStorage.setItem("order", JSON.stringify(Request.orderDetails))
         document.location.href="confirmation.html"

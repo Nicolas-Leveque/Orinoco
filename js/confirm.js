@@ -4,7 +4,7 @@ function getOrderDetails() {
     return new Promise((resolve, reject) => {
         if (localStorage.key("order")) {
             order = (JSON.parse(localStorage.getItem("order")))
-            console.log(order);
+            console.log('order', order);
             resolve(order);
         }
     }) 

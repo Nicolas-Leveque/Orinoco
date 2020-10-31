@@ -10,6 +10,7 @@ let Request = {
             request.onreadystatechange = function() {
                 if (this.readyState == XMLHttpRequest.DONE && this.status == 200) {
                     Request.response = JSON.parse(this.responseText);
+                    console.log('request Get', Request.response);
                     resolve(Request.response);
                 };
             };
@@ -26,7 +27,8 @@ let Request = {
             request.send(JSON.stringify(sendObj));
             request.onreadystatechange = () => {
                 if (request.readyState == 4 && request.status == 201) {
-                    Request.orderDetails = JSON.parse(request.responseText);                
+                    Request.orderDetails = JSON.parse(request.responseText);  
+                    console.log('request post', Request.orderDetails);
                     resolve(Request.orderDetails);
                 }
             }

@@ -10,7 +10,8 @@ let Cart = {
                         Cart.items.push(JSON.parse(localStorage.getItem(localStorage.key(i))));
                     }
                 };
-            
+            console.log('Cart.items', Cart.items);
+            console.log('localStorage', localStorage);
             resolve(Cart.items);
         });   
     }
