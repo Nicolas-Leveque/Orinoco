@@ -68,24 +68,24 @@ function contactInfo() {
     
     if (!prenomElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ-]{1,20}$/g) || prenomElt.value === '') {
         prenomElt.style.borderColor = 'red';
-        return;
+        return false;
     }
     if (!nomElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ-]{1,20}$/g) || nomElt.value === '') {
         nomElt.style.borderColor = 'red';
-        return
+        return false
     }
     if (!adresseElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ0-9-\s]{1,64}$/g) || adresseElt.value === '') {
         adresseElt.style.borderColor = 'red';
-        return
+        return false
     }
     if (!villeElt.value.match(/^[A-Za-zÀ-ÖØ-öø-ÿ-]{1,20}$/g) || villeElt.value === '') {
         console.log(villeElt.value);
         villeElt.style.borderColor = 'red';
-        return
+        return false
     }
     if (!emailElt.value.match(/[A-Za-z\._%0-9]+@+[A-Za-z0-9.-]+\.+[A-Za-z]/g) || emailElt.value === '') {
         emailElt.style.borderColor = 'red';
-        return
+        return false
     }
     contact = {
         firstName: prenomElt.value,
@@ -95,6 +95,8 @@ function contactInfo() {
         email: emailElt.value
     }
     console.log('contact', contact);
+    return true;
+    
 }
 //Verifie si il y a des produits dans le panier et créer un array avec les id pour envoyer à l'API
 function createBasketArray() {
@@ -123,11 +125,13 @@ function orderObj() {
 //Le bouton commander envoie la requête POST à l'API et récupère les infos de commande
 document.getElementById("confirm").addEventListener("click", (e) => {
     e.preventDefault();
-    contactInfo();
-    createBasketArray();
-    sendObj = {contact, products};
-    Request.post()
-        .then(orderObj)
+    let resultContact = contactInfo();
+    if (resultContact === true) {
+        createBasketArray();
+        sendObj = {contact, products};
+        Request.post()
+            .then(orderObj)
+    };
 });
 //bouton vider le panier
 document.getElementById("vide-panier").addEventListener("click", function (e) {
