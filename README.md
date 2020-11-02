@@ -24,3 +24,6 @@ pour démarrer le serveur web.
 
 Le front-end a été développé en HTML5 et CSS3 avec préprocesseur Sass et JavaScript.
 Aucun framework n'a été utilisé. 
+
+Lien direct hébergé sur GitHub Pages: 
+[https://nicolas-leveque.github.io/Orinoco/]
