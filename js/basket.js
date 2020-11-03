@@ -131,6 +131,8 @@ document.getElementById("confirm").addEventListener("click", (e) => {
         sendObj = {contact, products};
         Request.post()
             .then(orderObj)
+    }else {
+        alert("Formulaire incomplet / erroné");
     };
 });
 //bouton vider le panier

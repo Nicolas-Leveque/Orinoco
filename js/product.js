@@ -84,7 +84,7 @@ function ajoutPanier() {
 }
 
 //Envoie un requête à l'API pour récuperer les infos du produit choisi
-//Request.afterRequest = showProduct;
+
 Request.get(`http://localhost:3000/api/cameras/${idProduct}`)
     .then(showProduct);
 
