@@ -71,15 +71,17 @@ function ajoutPanier() {
         lense: productLense,
         quantity: productQty
     });
+    const productKey = `${Request.response._id}-${productLense}`;
+    console.log("productKey", productKey);
     console.log('panierObj', panierObj);
     //verifie si le produit est déjà dans le localStorage, si oui mets à jour la quantité
-    if(!localStorage.getItem(Request.response._id)) {
-        localStorage.setItem(Request.response._id, JSON.stringify(panierObj));
+    if(!localStorage.getItem(productKey)) {
+        localStorage.setItem(productKey, JSON.stringify(panierObj));
     }else {
-        let tmpProduct = JSON.parse(localStorage.getItem(Request.response._id));
+        let tmpProduct = JSON.parse(localStorage.getItem(productKey));
         let tmpQty = panierObj.quantity + tmpProduct.quantity;
         panierObj.quantity = tmpQty;
-        localStorage.setItem(Request.response._id, JSON.stringify(panierObj));
+        localStorage.setItem(productKey, JSON.stringify(panierObj));
     };
 }
 
