@@ -16,7 +16,7 @@ Dans le repertoire cloné, éxécuter la commande:
 
 pour installer les dépendances.  
 
-Ensuite pour éxécuté la commande 
+Ensuite pour éxécuter la commande 
 
 `node server` 
 
