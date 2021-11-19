@@ -48,7 +48,8 @@ function checkStorageTables(panier, basket, resolve) {
 };
 // Efface une ligne du panier
 function deleteLine(line) {
-    localStorage.removeItem(basket[line].id);
+    const storageKey = `${basket[line].id}-${basket[line].lense}`
+    localStorage.removeItem(storageKey);
     basket.splice(line, 1);
     createHTMLTable();
 };
